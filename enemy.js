@@ -1,5 +1,5 @@
 class Enemy {
-  constructor(game, x, y, width, height, speed, sprite) {
+  constructor(game, x, y, width, height, speed, index) {
     this.game = game;
 
     this.x = x;
@@ -7,7 +7,17 @@ class Enemy {
     this.width = width;
     this.heigth = height;
     this.speed = speed;
-    this.spriteSrc = sprite;
+    this.spriteIndex = index;
+
+    this.spriteArr = [
+      '/img/java.png',
+      '/img/c-lang.jpg.png',
+      '/img/php-logo.png',
+      '/img/python.png',
+      '/img/ruby.png'
+    ];
+    this.image = new Image();
+    this.image.src = this.spriteArr[this.spriteIndex];
   }
 
   checkIntersection(player) {
@@ -26,11 +36,12 @@ class Enemy {
   paint() {
     const context = this.game.context;
 
-    let enemySprite = new Image();
-    enemySprite.src = this.spriteSrc;
+    context.save();
 
-    enemySprite.addEventListener('load', () => {
-      context.drawImage(enemySprite, this.x, this.y, this.width, this.heigth);
-    });
+    //enemySprite.addEventListener('load', () => {
+    context.drawImage(this.image, this.x, this.y, this.width, this.heigth);
+    //});
+
+    context.restore();
   }
 }

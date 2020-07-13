@@ -2,33 +2,26 @@ class Bullet {
   constructor(game) {
     this.game = game;
 
-    this.x = this.game.player.x + this.game.player.width;
-    this.y = this.game.player.y + this.game.player.height;
+    this.x = this.game.player.x + this.game.player.width / 2;
+    this.y = this.game.player.y + this.game.player.height / 2;
 
     this.image = new Image();
     this.image.src = '/img/error_404.png';
   }
 
   runLogic() {
-    this.x += 2;
+    this.x += 35;
   }
 
   paint() {
     const context = this.game.context;
 
-    this.image.addEventListener('load', () => {
-      context.drawImage(this.image, this.x, this.y, 60, 14);
-    });
+    context.save();
 
-    /*
-    // Draw a circle
-    context.beginPath();
-    context.arc(100, 100, 20, 0, 2 * Math.PI);
-    context.fillStyle = '#062950';
-    context.fill();
+    //this.image.addEventListener('load', () => {
+    context.drawImage(this.image, this.x, this.y, 60, 14);
+    //});
 
-    context.strokeStyle = 'silver';
-    context.stroke();
-    */
+    context.restore();
   }
 }

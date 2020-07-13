@@ -9,21 +9,14 @@ class Game {
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
-    this.spriteArr = [
-      '/img/java.png',
-      '/img/c-lang.jpg.png',
-      '/img/php-logo.png',
-      '/img/python.png',
-      '/img/ruby.png'
-    ];
     this.enemy = new Enemy(
       this,
-      generateRandomNumber(1000, 1200),
+      generateRandomNumber(1000, 1400),
       generateRandomNumber(0, 450),
       50,
       50,
       generateRandomNumber(3, 4.5), //2.5, 4)
-      this.spriteArr[generateRandomNumber(0, 4)]
+      generateRandomNumber(0, 5)
     );
     this.enemies = [];
     for (let i = 0; i < 15; i++) {
@@ -66,12 +59,14 @@ class Game {
 
     for (let enemy of this.enemies) {
       enemy.runLogic();
+
       const intersecting = enemy.checkIntersection(this.player);
       if (intersecting) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
         this.player.health -= 20;
       }
+
       if (enemy.x + enemy.width < 0) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
@@ -85,16 +80,10 @@ class Game {
         50,
         50,
         generateRandomNumber(3, 4.5), //2.5, 4)
-        this.spriteArr[generateRandomNumber(0, 4)]
+        generateRandomNumber(0, 4)
       );
       this.enemies.push(enemy);
     }
-    /*
-    const intersecting = this.enemy.checkIntersection(this.player);
-    if (intersecting) {
-      this.player.health -= 20;
-    }
-    */
   }
 
   clean() {

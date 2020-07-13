@@ -9,6 +9,9 @@ class Player {
     this.height = 50;
 
     this.health = 200;
+
+    this.image = new Image();
+    this.image.src = '/img/js-player.png';
   }
 
   fireBullet() {}
@@ -18,18 +21,19 @@ class Player {
     if (this.y > canvasBottom) {
       this.y = canvasBottom;
     }
+    if (this.y < 0) {
+      this.y = 0;
+    }
   }
 
   paint() {
     const context = this.game.context;
 
-    let playerSprite = new Image();
-    playerSprite.src = '/img/js-player.png';
-
-    playerSprite.addEventListener('load', () => {
-      context.drawImage(playerSprite, this.x, this.y, this.width, this.height);
-    });
-
+    context.save();
+    //playerSprite.addEventListener('load', () => {
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    //});
+    context.restore();
     /*
     // Draw a circle
     context.beginPath();
