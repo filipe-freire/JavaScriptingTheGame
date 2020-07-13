@@ -5,7 +5,7 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.width = width;
-    this.heigth = height;
+    this.height = height;
     this.speed = speed;
     this.spriteIndex = index;
 
@@ -20,12 +20,14 @@ class Enemy {
     this.image.src = this.spriteArr[this.spriteIndex];
   }
 
-  checkIntersection(player) {
+  checkIntersection(item) {
+    console.log(item.x, item.width, item.y, item.height);
+    console.log(this.x, this.width, this.y, this.height);
     return (
-      player.x + player.width > this.x &&
-      player.x < this.x + this.width &&
-      player.y + player.height > this.y &&
-      player.y < this.y + this.height
+      item.x + item.width > this.x &&
+      item.x < this.x + this.width &&
+      item.y + item.height > this.y &&
+      item.y < this.y + this.height
     );
   }
 
@@ -39,7 +41,7 @@ class Enemy {
     context.save();
 
     //enemySprite.addEventListener('load', () => {
-    context.drawImage(this.image, this.x, this.y, this.width, this.heigth);
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
     //});
 
     context.restore();

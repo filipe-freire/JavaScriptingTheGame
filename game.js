@@ -19,7 +19,7 @@ class Game {
       generateRandomNumber(0, 5)
     );
     this.enemies = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 1; i++) {
       const enemy = this.enemy;
       this.enemies.push(enemy);
     }
@@ -44,9 +44,9 @@ class Game {
           console.log('arrow down pressed');
           console.log(this.player.y);
           break;
-        case 'Space': // doesn't work. Figure out why
+        case ' ': // doesn't work. Figure out why
           event.preventDefault();
-          // this.player.fireBullet(); // FUNCTION NEEDS TO BE CREATED STILL
+
           console.log('bullet fired.');
           break;
       }
@@ -61,6 +61,7 @@ class Game {
       enemy.runLogic();
 
       const intersecting = enemy.checkIntersection(this.player);
+      //console.log(intersecting);
       if (intersecting) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
@@ -72,7 +73,7 @@ class Game {
         this.enemies.splice(index, 1);
       }
     }
-    if (this.enemies.length < 15) {
+    if (this.enemies.length < 1) {
       const enemy = new Enemy(
         this,
         generateRandomNumber(1000, 1500),
@@ -92,11 +93,14 @@ class Game {
 
   paint() {
     this.player.paint();
-    this.bullet.paint();
     this.scoreboard.paint();
     for (let enemy of this.enemies) {
       enemy.paint();
     }
+    /* if (bulletFired) {
+      this.bullet.paint();
+    }
+    */
   }
 
   loop() {

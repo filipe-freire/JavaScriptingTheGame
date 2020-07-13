@@ -14,8 +14,6 @@ class Player {
     this.image.src = '/img/js-player.png';
   }
 
-  fireBullet() {}
-
   runLogic() {
     const canvasBottom = this.game.canvas.height - this.height;
     if (this.y > canvasBottom) {
