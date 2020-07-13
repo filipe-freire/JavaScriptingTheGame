@@ -9,20 +9,24 @@ class Game {
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
+    // enemies
     this.enemy = new Enemy(
       this,
       generateRandomNumber(1000, 1400),
       generateRandomNumber(0, 450),
       50,
       50,
-      generateRandomNumber(3, 4.5), //2.5, 4)
+      generateRandomNumber(3, 5), //2.5, 4)
       generateRandomNumber(0, 5)
     );
     this.enemies = [];
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 15; i++) {
       const enemy = this.enemy;
       this.enemies.push(enemy);
     }
+    // Bullets
+    this.bullets = [];
+
     this.scoreboard = new Scoreboard(this);
 
     this.setKeyBindings();
@@ -35,19 +39,22 @@ class Game {
         case 'ArrowUp':
           event.preventDefault();
           this.player.y -= 10;
-          console.log('arrow up pressed');
-          console.log(this.player.y);
           break;
         case 'ArrowDown':
           event.preventDefault();
           this.player.y += 10;
-          console.log('arrow down pressed');
-          console.log(this.player.y);
           break;
-        case ' ': // doesn't work. Figure out why
+        case ' ':
           event.preventDefault();
-
-          console.log('bullet fired.');
+          if (this.bullet.bulletsLeft > 0) {
+            this.bullet.bulletsLeft--;
+            console.log(this.bullet.bulletsLeft);
+            const bullet = new Bullet(this);
+            this.bullets.push(bullet);
+            console.log(this.bullets);
+          } else {
+            console.log("You're out of bullets!");
+          }
           break;
       }
     });
@@ -55,25 +62,31 @@ class Game {
 
   runLogic() {
     this.player.runLogic();
-    this.bullet.runLogic();
 
     for (let enemy of this.enemies) {
       enemy.runLogic();
-
-      const intersecting = enemy.checkIntersection(this.player);
-      //console.log(intersecting);
-      if (intersecting) {
+      const intersectingWithPlayer = enemy.checkIntersection(this.player);
+      //console.log(intersectingWithPlayer);
+      if (intersectingWithPlayer) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
         this.player.health -= 20;
       }
 
+      if (this.bullets.length > 0) {
+        const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
+        console.log(intersectingWithBullet);
+        if (intersectingWithBullet) {
+          const index = this.enemies.indexOf(enemy);
+          this.enemies.splice(index, 1);
+        }
+      }
       if (enemy.x + enemy.width < 0) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
       }
     }
-    if (this.enemies.length < 1) {
+    if (this.enemies.length < 15) {
       const enemy = new Enemy(
         this,
         generateRandomNumber(1000, 1500),
@@ -84,6 +97,16 @@ class Game {
         generateRandomNumber(0, 4)
       );
       this.enemies.push(enemy);
+    }
+    // Bullet
+    if (this.bullets.length > 0) {
+      for (let bullet of this.bullets) {
+        const index = this.bullets.indexOf(bullet);
+        bullet.runLogic();
+        if (bullet.x > 1000) {
+          this.bullets.splice(index, 1);
+        }
+      }
     }
   }
 
@@ -97,10 +120,11 @@ class Game {
     for (let enemy of this.enemies) {
       enemy.paint();
     }
-    /* if (bulletFired) {
-      this.bullet.paint();
+    if (this.bullets.length > 0) {
+      for (let bullet of this.bullets) {
+        bullet.paint();
+      }
     }
-    */
   }
 
   loop() {

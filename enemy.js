@@ -21,8 +21,8 @@ class Enemy {
   }
 
   checkIntersection(item) {
-    console.log(item.x, item.width, item.y, item.height);
-    console.log(this.x, this.width, this.y, this.height);
+    // console.log(item.x, item.width, item.y, item.height);
+    // console.log(this.x, this.width, this.y, this.height);
     return (
       item.x + item.width > this.x &&
       item.x < this.x + this.width &&
