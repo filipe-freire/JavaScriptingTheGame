@@ -35,6 +35,34 @@ class Game {
     this.screenText = new Screentext(this);
 
     this.setKeyBindings();
+
+    this.paused = false;
+
+    // ---- Sounds ----
+    // Start Game sound
+    this.clickStartSound = new Audio('/start-game-sound.wav');
+
+    // Game music
+    this.gameMusic = new Audio('/Jeremy Blake - Powerup 8-bit Music.mp3');
+
+    // Bullet being Fired
+    this.fireBulletSound = new Audio('/zap.flac');
+
+    // Game Over Sound
+    this.gameOverSound = new Audio('/game-over.wav');
+  }
+
+  playMusic() {
+    this.gameMusic.play();
+    console.log('music');
+  }
+
+  togglePause() {
+    if (!this.paused) {
+      this.paused = true;
+    } else if (this.paused) {
+      this.paused = false;
+    }
   }
 
   setKeyBindings() {
@@ -42,25 +70,35 @@ class Game {
       const key = event.key;
       switch (key) {
         case 'ArrowUp':
-          event.preventDefault();
-          this.player.y -= 10;
-          break;
-        case 'ArrowDown':
-          event.preventDefault();
-          this.player.y += 10;
-          break;
-        case ' ':
-          event.preventDefault();
-          if (this.bullet.bulletsLeft > 0) {
-            this.bullet.bulletsLeft--;
-            console.log(this.bullet.bulletsLeft);
-            const bullet = new Bullet(this);
-            this.bullets.push(bullet);
-            console.log(this.bullets);
-          } else {
-            console.log("You're out of bullets!");
+          if (!this.paused) {
+            event.preventDefault();
+            this.player.y -= 10;
+            break;
           }
-          break;
+        case 'ArrowDown':
+          if (!this.paused) {
+            event.preventDefault();
+            this.player.y += 10;
+            break;
+          }
+        case ' ':
+          if (!this.paused) {
+            event.preventDefault();
+            if (this.bullet.bulletsLeft > 0) {
+              this.bullet.bulletsLeft--;
+              //console.log(this.bullet.bulletsLeft);
+              const bullet = new Bullet(this);
+              this.bullets.push(bullet);
+              //console.log(this.bullets);
+              this.fireBulletSound.play();
+            } else {
+              //console.log("You're out of bullets!");
+            }
+            break;
+          }
+        case 'q':
+          event.preventDefault();
+          this.togglePause();
       }
     });
   }
@@ -126,6 +164,8 @@ class Game {
     // Game Over
     if (this.player.health <= 0) {
       this.isRunning = false;
+      this.gameOverSound.play();
+      this.gameMusic.pause();
     }
 
     // Update Score
@@ -151,7 +191,9 @@ class Game {
 
   loop() {
     // Run logic
-    this.runLogic();
+    if (!this.paused) {
+      this.runLogic();
+    }
 
     // Erase
     this.clean();

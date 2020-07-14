@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+
 *,
 ::before,
 ::after {
@@ -6,21 +9,64 @@
   margin: 0;
 }
 
+h1 {
+  font-size: 3em;
+  font-family: 'Black Ops One', sans-serif;
+  filter: drop-shadow(0 0 0.75rem rgb(255, 231, 14));
+}
+
 html,
 body {
   height: 100vh;
+  font-family: 'Anonymous Pro', monospace;
 }
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0b2544;
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23443e00' fill-opacity='0.33'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.game-intro {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin-bottom: 2em;
+  color: #fff;
+}
+
+.game-intro > p {
+  /* max-width: 700px; */
+  margin-top: 1em;
+  line-height: 1.1;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.bullet-number {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #f3f168;
 }
 
 canvas {
-  background: url('/img/game-background.png') no-repeat center center/cover;
+  background: url('/img/game-background2.jpg') no-repeat center center/cover;
   box-shadow: 0px 0px 15px 2px rgba(221, 214, 74, 0.507);
   border: 2px groove #eee9d0;
   border-radius: 5px;
+}
+
+#startGame {
+  margin: 1em auto 0;
+  padding: 0.25em 2em;
+  background-color: #d3a831;
+  font-family: 'Black Ops One', sans-serif;
+  font-size: 1.5em;
+  filter: drop-shadow(0 0 6px #ecd448);
 }
