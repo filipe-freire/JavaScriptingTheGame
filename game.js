@@ -9,86 +9,81 @@ class Game {
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
+    this.screenText = new Screentext(this);
 
     // Enemies
-    this.enemy = new Enemy(
-      this,
-      generateRandomNumber(1000, 1400),
-      generateRandomNumber(0, 450),
-      50,
-      50,
-      generateRandomNumber(3, 5), //2.5, 4)
-      generateRandomNumber(0, 5)
-    );
-
     this.enemiesArr = [];
-
-    for (let i = 0; i < 15; i++) {
-      const enemy = this.enemy;
-      this.enemiesArr.push(enemy);
-    }
+    this.createEnemy();
 
     // Powerups
-    this.powerup = new Powerup(
-      this,
-      generateRandomNumber(500, 600),
-      generateRandomNumber(0, 450),
-      50,
-      50,
-      generateRandomNumber(3, 5), //2.5, 4)
-      generateRandomNumber(0, 3)
-    );
     this.powerupsArr = [];
-    for (let i = 0; i < 3; i++) {
-      const powerup = this.powerup;
-      this.powerupsArr.push(powerup);
-    }
+    this.createPowerup();
 
     // Bullets
     this.bullets = [];
 
     // Game Over
     this.isRunning = true;
-
-    this.screenText = new Screentext(this);
+    this.isPaused = false;
 
     this.setKeyBindings();
-
-    this.isPaused = false;
 
     // ---- Sounds ----
     // Start Game sound
     this.clickStartSound = new Audio('/start-game-sound.wav');
-
     // Game music
     this.gameMusic = new Audio('/Jeremy Blake - Powerup 8-bit Music.mp3');
-
     // Bullet being Fired
     this.fireBulletSound = new Audio('/zap.flac');
-
     // Bullet hitting enemy
     this.bulletHittingEnemy = new Audio('/bullet-hits-enemy.wav');
-
     // Enemy hits player
     this.enemyHitsPlayerSound = new Audio('/enemy-hits-player.wav');
-
     // Player Picks Powerup
     this.playerPicksPowerup = new Audio('/picked-powerup.mp3');
-
     // Game Over Sound
     this.gameOverSound = new Audio('/game-over.wav');
 
     // CONSTRUCTOR ENDS
   }
 
-  /*
+  createPowerup() {
+    if (this.powerupsArr.length < 3) {
+      const powerup = new Powerup(
+        this,
+        generateRandomNumber(500, 600),
+        generateRandomNumber(0, 450),
+        50,
+        50,
+        generateRandomNumber(3, 5), //2.5, 4)
+        generateRandomNumber(0, 3)
+      );
+      this.powerupsArr.push(powerup);
+    }
+
+    setTimeout(() => {
+      this.createPowerup();
+    }, 1000);
+  }
+
   createEnemy() {
+    if (this.enemiesArr.length < 15) {
+      const enemy = new Enemy(
+        this,
+        generateRandomNumber(1000, 1400),
+        generateRandomNumber(0, 450),
+        50,
+        50,
+        generateRandomNumber(3, 5), //2.5, 4)
+        generateRandomNumber(0, 5)
+      );
+      this.enemiesArr.push(enemy);
+    }
 
     setTimeout(() => {
       this.createEnemy();
     }, 1000);
   }
-*/
 
   playMusic() {
     this.gameMusic.play();
