@@ -11,7 +11,13 @@ window.addEventListener('load', () => {
       startGameSound();
       game.playMusic();
       gameHasStarted = true;
+      startButton.innerHTML = 'Pause';
+      game.isPaused = false;
       game.loop();
+    } else {
+      game.gameMusic.pause();
+      game.isPaused = true;
+      startButton.innerHTML = 'Start';
     }
   };
 

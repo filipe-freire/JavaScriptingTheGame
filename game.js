@@ -9,7 +9,8 @@ class Game {
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
-    // enemies
+
+    // Enemies
     this.enemy = new Enemy(
       this,
       generateRandomNumber(1000, 1400),
@@ -19,7 +20,9 @@ class Game {
       generateRandomNumber(3, 5), //2.5, 4)
       generateRandomNumber(0, 5)
     );
+
     this.enemiesArr = [];
+
     for (let i = 0; i < 15; i++) {
       const enemy = this.enemy;
       this.enemiesArr.push(enemy);
@@ -78,9 +81,17 @@ class Game {
     // CONSTRUCTOR ENDS
   }
 
+  /*
+  createEnemy() {
+
+    setTimeout(() => {
+      this.createEnemy();
+    }, 1000);
+  }
+*/
+
   playMusic() {
     this.gameMusic.play();
-    console.log('music');
   }
 
   togglePause() {
@@ -189,8 +200,21 @@ class Game {
         this.playerPicksPowerup.play();
         const index = this.powerupsArr.indexOf(powerup);
         this.powerupsArr.splice(index, 1);
-        this.bullet.bulletsLeft += 5;
+        // depending on the image src, give the player different abilities (ex increase movement speed, shield)
+        this.bullet.bulletsLeft += 1;
       }
+
+      // check collision with bullet
+      if (this.bullets.length > 0) {
+        const intersectingWithBullet = powerup.checkIntersection(this.bullets[0]);
+        // console.log(intersectingWithBullet);
+        if (intersectingWithBullet) {
+          this.bulletHittingEnemy.play();
+          const index = this.powerupsArr.indexOf(powerup);
+          this.powerupsArr.splice(index, 1);
+        }
+      }
+
       if (powerup.x + powerup.width < 0) {
         const index = this.powerupsArr.indexOf(powerup);
         this.powerupsArr.splice(index, 1);
