@@ -15,7 +15,7 @@ class Player {
   }
 
   runLogic() {
-    const canvasBottom = this.game.canvas.height - this.height;
+    const canvasBottom = 500 - this.height;
     if (this.y > canvasBottom) {
       this.y = canvasBottom;
     }

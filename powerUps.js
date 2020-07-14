@@ -1,4 +1,4 @@
-class Enemy {
+class Powerup {
   constructor(game, x, y, width, height, speed, index) {
     this.game = game;
 
@@ -10,11 +10,10 @@ class Enemy {
     this.spriteIndex = index;
 
     this.spriteArr = [
-      '/img/java.png',
-      '/img/c-lang.png',
-      '/img/php-logo.png',
-      '/img/python.png',
-      '/img/ruby.png'
+      '/img/powerups/angular.png',
+      '/img/powerups/react.png',
+      '/img/powerups/vuejs.png',
+      '/img/powerups/TS.png'
     ];
     this.image = new Image();
     this.image.src = this.spriteArr[this.spriteIndex];
