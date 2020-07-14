@@ -21,5 +21,6 @@ body {
 canvas {
   background: url('/img/game-background.png') no-repeat center center/cover;
   box-shadow: 0px 0px 15px 2px rgba(221, 214, 74, 0.507);
+  border: 2px groove #eee9d0;
   border-radius: 5px;
 }

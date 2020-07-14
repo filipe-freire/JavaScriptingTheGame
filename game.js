@@ -27,7 +27,12 @@ class Game {
     // Bullets
     this.bullets = [];
 
-    this.scoreboard = new Scoreboard(this);
+    // Powerup
+
+    // Game Over
+    this.isRunning = true;
+
+    this.screenText = new Screentext(this);
 
     this.setKeyBindings();
   }
@@ -63,16 +68,20 @@ class Game {
   runLogic() {
     this.player.runLogic();
 
+    // enemy run logic
     for (let enemy of this.enemies) {
       enemy.runLogic();
+
       const intersectingWithPlayer = enemy.checkIntersection(this.player);
-      //console.log(intersectingWithPlayer);
+
+      // check collision with player
       if (intersectingWithPlayer) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
         this.player.health -= 20;
       }
 
+      // check collision with bullet
       if (this.bullets.length > 0) {
         const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
         console.log(intersectingWithBullet);
@@ -81,11 +90,15 @@ class Game {
           this.enemies.splice(index, 1);
         }
       }
+
+      // eleminate enemy from array if it goes off canvas
       if (enemy.x + enemy.width < 0) {
         const index = this.enemies.indexOf(enemy);
         this.enemies.splice(index, 1);
       }
     }
+
+    // push a new enemy into the enemies array whenever one is taken out of the game
     if (this.enemies.length < 15) {
       const enemy = new Enemy(
         this,
@@ -98,6 +111,7 @@ class Game {
       );
       this.enemies.push(enemy);
     }
+
     // Bullet
     if (this.bullets.length > 0) {
       for (let bullet of this.bullets) {
@@ -108,6 +122,14 @@ class Game {
         }
       }
     }
+
+    // Game Over
+    if (this.player.health <= 0) {
+      this.isRunning = false;
+    }
+
+    // Update Score
+    const interval = setInterval(this.screenText.incrementScore(), 1000);
   }
 
   clean() {
@@ -116,7 +138,7 @@ class Game {
 
   paint() {
     this.player.paint();
-    this.scoreboard.paint();
+    this.screenText.paint();
     for (let enemy of this.enemies) {
       enemy.paint();
     }
@@ -137,8 +159,17 @@ class Game {
     // Paint
     this.paint();
 
-    setTimeout(() => {
-      this.loop();
-    }, 1000 / 60);
+    if (this.isRunning) {
+      setTimeout(() => {
+        this.loop();
+      }, 1000 / 60);
+    } else {
+      console.log('Game Over');
+      alert(
+        `Game Over! you managed to keep your code integrity from collapsing for ${Math.floor(
+          this.screenText.score
+        )} seconds!`
+      );
+    }
   }
 }
