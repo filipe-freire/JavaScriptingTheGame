@@ -17,17 +17,28 @@ h1 {
 
 html,
 body {
-  height: 100vh;
+  height: 100%;
   font-family: 'Anonymous Pro', monospace;
 }
 
 body {
+  background-color: #131104;
+  background-image: url('/img/background3.jpg');
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23443e00' fill-opacity='0.33'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.container {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+
+  /* background-color: #0e0a02e3; */
+  height: 100%;
+  padding: 0 4em;
 }
 
 .game-intro {
@@ -39,6 +50,10 @@ body {
   max-width: 900px;
   margin-bottom: 2em;
   color: #fff;
+  margin: 0 auto 2em;
+  background-color: #000000bb;
+  padding: 2em 1em;
+  border: 2px solid #7e7c0b;
 }
 
 .game-intro > p {
@@ -69,4 +84,21 @@ canvas {
   font-family: 'Black Ops One', sans-serif;
   font-size: 1.5em;
   filter: drop-shadow(0 0 6px #ecd448);
+}
+
+/* div that appears after Game Over */
+
+.game-over-screen {
+  position: relative;
+  width: auto;
+  height: auto;
+  background-color: #000000;
+  color: #fff;
+  font-size: 3em;
+}
+
+.wrapper {
+  position: relative;
+
+  margin-bottom: 2em;
 }

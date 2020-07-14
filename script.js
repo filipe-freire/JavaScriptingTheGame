@@ -31,21 +31,4 @@ window.addEventListener('load', () => {
       game.togglePause();
     }
   });
-
-  /* if (gameHasStarted === false && startButton.onclick()) {
-    gameHasStarted = true;
-    game.loop();
-  } */
-  /*
-  window.addEventListener('keydown', event => {
-    const key = event.key;
-    switch (key) {
-      case 'ArrowUp':
-        event.preventDefault();
-        this.player.y -= 10;
-        break;
-      
-    }
-  })
-  */
 });

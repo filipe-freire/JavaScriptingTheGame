@@ -7,28 +7,33 @@
     <title>JavaScripting Adventure</title>
   </head>
   <body>
-    <div class="game-intro">
-      <h1>JavaScripting Adventure!</h1>
-      <p>
-        Hello JS warrior! Are you ready for your JavaScripting Adventure?
-      </p>
-      <p>
-        A group of programming languages broke into your files and are trying to damage your code by
-        inserting their own, turning it into pure giberish!! We can't let that happen!
-      </p>
-      <p>
-        Your objective is to dodge incoming programming languages in order to keep your code
-        integrity for as long as possible.
-      </p>
-      <p>
-        You can also shoot <span class="bullet-number">5</span> error 404's to get the other
-        languages out of your way!
-        <br />
-        Are you ready? Let's go!
-      </p>
-      <button id="startGame">Play</button>
-    </div>
-    <canvas id="game" width="1000" height="600"></canvas>
+    <main class="container">
+      <footer>Made by Filipe Freire</footer>
+      <div class="game-intro">
+        <h1>JavaScripting Adventure!</h1>
+        <p>
+          Hello JS warrior! Are you ready for your JavaScripting Adventure?
+        </p>
+        <p>
+          A group of programming languages broke into your files and are trying to damage your code
+          by inserting their own, turning it into pure giberish!! We can't let that happen!
+        </p>
+        <p>
+          Your objective is to dodge incoming programming languages in order to keep your code
+          integrity for as long as possible.
+        </p>
+        <p>
+          You can also shoot <span class="bullet-number">5</span> error 404's to get the other
+          languages out of your way!
+          <br />
+          Are you ready? Let's go!
+        </p>
+        <button id="startGame">Play</button>
+      </div>
+      <div class="wrapper">
+        <canvas id="game" width="1000" height="600"></canvas>
+      </div>
+    </main>
 
     <script src="player.js"></script>
     <script src="enemy.js"></script>

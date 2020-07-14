@@ -51,7 +51,7 @@ class Game {
     if (this.powerupsArr.length < 3) {
       const powerup = new Powerup(
         this,
-        generateRandomNumber(500, 600),
+        generateRandomNumber(1000, 1600),
         generateRandomNumber(0, 450),
         50,
         50,
@@ -70,7 +70,7 @@ class Game {
     if (this.enemiesArr.length < 15) {
       const enemy = new Enemy(
         this,
-        generateRandomNumber(1000, 1400),
+        generateRandomNumber(1000, 1600),
         generateRandomNumber(0, 450),
         50,
         50,
@@ -244,9 +244,9 @@ class Game {
 
     // Game Over
     if (this.player.health <= 0) {
-      this.isRunning = false;
       this.gameOverSound.play();
       this.gameMusic.pause();
+      this.isRunning = false;
     }
 
     // Update Score
@@ -290,12 +290,8 @@ class Game {
         this.loop();
       }, 1000 / 60);
     } else {
-      console.log('Game Over');
-      alert(
-        `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
-          this.screenText.score
-        )} seconds and eliminate ${this.screenText.enemiesEliminated} threats!`
-      );
+      this.screenText.printScore();
+      alert(this.screenText.gameOverMessage);
     }
   }
 }
