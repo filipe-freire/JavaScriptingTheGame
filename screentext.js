@@ -24,6 +24,9 @@ class Screentext {
       case 40:
         this.level = 5;
         break;
+      case 80:
+        this.level = 6;
+        break;
     }
   }
 
@@ -63,13 +66,13 @@ class Screentext {
     context.fillStyle = 'orange';
     context.font = '50px "Yatra One"';
 
-    context.fillText(`LEVEL ${this.level}`, 450, 550);
+    context.fillText(`LEVEL ${this.level}`, 380, 570);
 
     context.fillStyle = 'white';
     context.font = '20px monospace';
 
     // Prints Health
-    context.fillText(`Code Integrity: ${this.game.player.health}`, 15, 550);
+    context.fillText(`Code Integrity: ${this.game.player.health}`, 15, 570);
 
     // Prints Score
     context.fillText(`Score: ${Math.floor(this.score)}`, 720, 550);
@@ -77,8 +80,9 @@ class Screentext {
     // Prints eliminated enemies
     context.fillText(`Enemies Eliminated: ${this.enemiesEliminated}`, 720, 580);
 
-    context.fillText(`${this.game.bullet.bulletsLeft} x`, 15, 520);
-    context.drawImage(this.game.bullet.image, 60, 505, 70, 20);
+    // Prints Bullets Left
+    context.fillText(`${this.game.bullet.bulletsLeft} x`, 15, 530);
+    context.drawImage(this.game.bullet.image, 75, 513, 70, 20);
 
     context.restore();
   }

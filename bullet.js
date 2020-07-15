@@ -11,7 +11,8 @@ class Bullet {
     this.image = new Image();
     this.image.src = '/img/error_404.png';
 
-    this.bulletsLeft = 5;
+    this.bulletsLeft = 50;
+    this.bulletBossCounter = 0;
   }
 
   runLogic() {

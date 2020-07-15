@@ -13,14 +13,17 @@ class Enemy {
     this.java.src = '/img/java.png';
     this.php = new Image();
     this.php.src = '/img/php-logo.png';
-    this.cLang = new Image();
-    this.cLang.src = '/img/c-lang.png';
+    this.cSharp = new Image();
+    this.cSharp.src = '/img/c-sharp.png';
     this.python = new Image();
     this.python.src = '/img/python.png';
     this.ruby = new Image();
     this.ruby.src = '/img/ruby.png';
 
-    this.spriteArr = [this.java, this.php, this.cLang, this.python, this.ruby];
+    this.boss = new Image();
+    this.boss.src = '/img/c-lang.png';
+
+    this.spriteArr = [this.java, this.php, this.cSharp, this.python, this.ruby, this.boss];
 
     this.image = this.spriteArr[this.spriteIndex];
   }

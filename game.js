@@ -12,6 +12,9 @@ class Game {
     this.bullet = new Bullet(this);
     this.screenText = new Screentext(this);
 
+    // Highscores for after game over
+    this.highscore = [];
+
     // Enemies
     this.enemiesArr = [];
     this.createEnemy();
@@ -128,6 +131,18 @@ class Game {
           this.enemiesArr.push(enemy);
         }
         break;
+      case 6: // ADD BOSS BATTLE
+        const enemy = new Enemy(
+          this,
+          generateRandomNumber(1000, 1200),
+          generateRandomNumber(0, 225),
+          300,
+          300,
+          generateRandomNumber(0.9, 1.1), //2.5, 4)
+          5
+        );
+        this.enemiesArr.push(enemy);
+        break;
     }
 
     // setTimeout(() => {
@@ -190,41 +205,80 @@ class Game {
   runLogic() {
     this.player.runLogic();
 
+    if (this.screenText.level === 7) {
+      this.isRunning = false;
+    }
+
     // enemy run logic
-    for (let enemy of this.enemiesArr) {
-      enemy.runLogic();
+    if (this.screenText.level === 6) {
+      for (let enemy of this.enemiesArr) {
+        enemy.runLogic();
 
-      const intersectingWithPlayer = enemy.checkIntersection(this.player);
+        const intersectingWithPlayer = enemy.checkIntersection(this.player);
 
-      // check collision with player
-      if (intersectingWithPlayer) {
-        this.sounds.enemyHitsPlayerSound.play();
-        const index = this.enemiesArr.indexOf(enemy);
-        this.enemiesArr.splice(index, 1);
-        this.player.health -= 20;
+        // check collision with player
+        if (intersectingWithPlayer) {
+          this.sounds.enemyHitsPlayerSound.play();
+          this.player.health = 0; // add game-over directly
+        }
+
+        // check collision with bullet
+        if (this.bullets.length > 0) {
+          this.bullets.forEach(bullet => {
+            const index = this.bullets.indexOf(bullet);
+            const intersectingWithBullet = enemy.checkIntersection(bullet);
+
+            if (intersectingWithBullet) {
+              this.sounds.bulletHittingEnemy.play();
+              this.bullets.splice(index, 1);
+              this.bullet.bulletBossCounter++;
+              console.log(this.bullet.bulletBossCounter);
+            }
+            if (this.bullet.bulletBossCounter === 50) {
+              const index = this.enemiesArr.indexOf(enemy);
+              this.enemiesArr.splice(index, 1);
+              this.screenText.level++;
+            }
+          });
+        }
       }
+    } else {
+      // all the other levels
+      for (let enemy of this.enemiesArr) {
+        enemy.runLogic();
 
-      // check collision with bullet
-      if (this.bullets.length > 0) {
-        const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
-        // console.log(intersectingWithBullet);
-        if (intersectingWithBullet) {
-          this.sounds.bulletHittingEnemy.play();
-          this.screenText.enemiesEliminated += 1;
+        const intersectingWithPlayer = enemy.checkIntersection(this.player);
+
+        // check collision with player
+        if (intersectingWithPlayer) {
+          this.sounds.enemyHitsPlayerSound.play();
+          const index = this.enemiesArr.indexOf(enemy);
+          this.enemiesArr.splice(index, 1);
+          this.player.health -= 20;
+        }
+
+        // check collision with bullet
+        if (this.bullets.length > 0) {
+          const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
+          // console.log(intersectingWithBullet);
+          if (intersectingWithBullet) {
+            this.sounds.bulletHittingEnemy.play();
+            this.screenText.enemiesEliminated += 1;
+            const index = this.enemiesArr.indexOf(enemy);
+            this.enemiesArr.splice(index, 1);
+          }
+        }
+
+        // eleminate enemy from array if it goes off canvas
+        if (enemy.x + enemy.width < 0) {
           const index = this.enemiesArr.indexOf(enemy);
           this.enemiesArr.splice(index, 1);
         }
       }
-
-      // eleminate enemy from array if it goes off canvas
-      if (enemy.x + enemy.width < 0) {
-        const index = this.enemiesArr.indexOf(enemy);
-        this.enemiesArr.splice(index, 1);
-      }
     }
 
     // push a new enemy into the enemiesArr whenever one is taken out of the game
-    // CHANGE WHEN LEVEL CHANGES
+    // Add New Levels here
 
     switch (this.screenText.level) {
       case 1:
@@ -285,6 +339,20 @@ class Game {
         break;
       case 5:
         if (this.enemiesArr.length < 80) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2500),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(2, 3), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 6: // ADD BOSS BATTLE
+        if (this.enemiesArr.length < 1) {
           const enemy = new Enemy(
             this,
             generateRandomNumber(1000, 2500),
