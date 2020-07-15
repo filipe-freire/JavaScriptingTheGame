@@ -2,31 +2,41 @@ class Screentext {
   constructor(game) {
     this.game = game;
 
+    this.level = 1;
     this.score = 0;
     this.enemiesEliminated = 0;
     this.gameOverMessage = '';
-
     this.hud = this.createHud();
   }
 
+  increaseLevel() {
+    switch (this.enemiesEliminated) {
+      case 10:
+        this.level = 2;
+        console.log('level 2');
+        break;
+      case 20:
+        this.level = 3;
+        break;
+      case 30:
+        this.level = 4;
+        break;
+      case 40:
+        this.level = 5;
+        break;
+    }
+  }
+
   printScore() {
-    // const parentWrapper = document.querySelector('wrapper');
-    // const div = document.createElement('div');
-    //div.innerHTML = 'my <b>new</b> skill - <large>DOM maniuplation!</large>';
-    // better to use CSS though - just set class
     if (this.score >= 60) {
-      this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
-        this.score
-      )} minutes and eliminate ${this.enemiesEliminated} threats!`;
+      this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${
+        Math.floor(this.score) / 60
+      } minutes and eliminate ${this.enemiesEliminated} threats!`;
     } else {
       this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
         this.score
       )} seconds and eliminate ${this.enemiesEliminated} threats!`;
     }
-
-    // Create Overlay
-    // div.setAttribute('class', 'game-over-screen');
-    // parentWrapper.appendChild(div);
   }
 
   createHud() {
@@ -39,7 +49,8 @@ class Screentext {
   }
 
   runLogic() {
-    this.score++;
+    this.incrementScore();
+    this.increaseLevel();
   }
 
   paint() {
@@ -48,6 +59,11 @@ class Screentext {
     this.hud = this.createHud();
 
     context.save();
+
+    context.fillStyle = 'orange';
+    context.font = '50px "Yatra One"';
+
+    context.fillText(`LEVEL ${this.level}`, 450, 550);
 
     context.fillStyle = 'white';
     context.font = '20px monospace';

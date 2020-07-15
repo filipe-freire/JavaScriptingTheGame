@@ -28,19 +28,7 @@ class Player {
     const context = this.game.context;
 
     context.save();
-    //playerSprite.addEventListener('load', () => {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
-    //});
     context.restore();
-    /*
-    // Draw a circle
-    context.beginPath();
-    context.arc(100, 100, 20, 0, 2 * Math.PI);
-    context.fillStyle = '#062950';
-    context.fill();
-
-    context.strokeStyle = 'silver';
-    context.stroke();
-    */
   }
 }

@@ -9,19 +9,21 @@ class Powerup {
     this.speed = speed;
     this.spriteIndex = index;
 
-    this.spriteArr = [
-      '/img/powerups/angular.png',
-      '/img/powerups/react.png',
-      '/img/powerups/vuejs.png',
-      '/img/powerups/TS.png'
-    ];
-    this.image = new Image();
-    this.image.src = this.spriteArr[this.spriteIndex];
+    this.angular = new Image();
+    this.angular.src = '/img/powerups/angular.png';
+    this.react = new Image();
+    this.react.src = '/img/powerups/react.png';
+    this.vue = new Image();
+    this.vue.src = '/img/powerups/vuejs.png';
+    this.typescript = new Image();
+    this.typescript.src = '/img/powerups/TS.png';
+
+    this.spriteArr = [this.angular, this.react, this.vue, this.typescript];
+
+    this.image = this.spriteArr[this.spriteIndex];
   }
 
   checkIntersection(item) {
-    // console.log(item.x, item.width, item.y, item.height);
-    // console.log(this.x, this.width, this.y, this.height);
     return (
       item.x + item.width > this.x &&
       item.x < this.x + this.width &&

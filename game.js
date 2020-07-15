@@ -6,6 +6,7 @@ class Game {
   constructor(canvas) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
+    this.startButton = document.getElementById('startGame');
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
@@ -53,23 +54,85 @@ class Game {
     }, 1000);
   }
 
+  // CHANGE WHEN LEVEL CHANGES
   createEnemy() {
-    if (this.enemiesArr.length < 15) {
-      const enemy = new Enemy(
-        this,
-        generateRandomNumber(1000, 1600),
-        generateRandomNumber(0, 450),
-        50,
-        50,
-        generateRandomNumber(3, 5), //2.5, 4)
-        generateRandomNumber(0, 5)
-      );
-      this.enemiesArr.push(enemy);
+    switch (this.screenText.level) {
+      case 1:
+        if (this.enemiesArr.length < 10) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 5), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+          console.log(enemy);
+        }
+        break;
+      case 2:
+        if (this.enemiesArr.length < 15) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 5), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 3:
+        if (this.enemiesArr.length < 20) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 5), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 4:
+        if (this.enemiesArr.length < 40) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(1.3, 2), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 5:
+        if (this.enemiesArr.length < 80) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(1.3, 2), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
     }
 
-    setTimeout(() => {
-      this.createEnemy();
-    }, 1000);
+    // setTimeout(() => {
+    //   this.createEnemy();
+    // }, 1000);
   }
 
   playMusic() {
@@ -78,8 +141,10 @@ class Game {
 
   togglePause() {
     if (!this.isPaused) {
+      this.startButton.innerHTML = 'Start';
       this.isPaused = true;
     } else if (this.isPaused) {
+      this.startButton.innerHTML = 'Pause';
       this.isPaused = false;
     }
   }
@@ -100,7 +165,7 @@ class Game {
             this.player.y += 10;
             break;
           }
-        case ' ':
+        case 'b':
           if (!this.isPaused) {
             event.preventDefault();
             if (this.bullet.bulletsLeft > 0) {
@@ -159,17 +224,79 @@ class Game {
     }
 
     // push a new enemy into the enemiesArr whenever one is taken out of the game
-    if (this.enemiesArr.length < 15) {
-      const enemy = new Enemy(
-        this,
-        generateRandomNumber(1000, 1500),
-        generateRandomNumber(0, 450),
-        50,
-        50,
-        generateRandomNumber(3, 4.5), //2.5, 4)
-        generateRandomNumber(0, 4)
-      );
-      this.enemiesArr.push(enemy);
+    // CHANGE WHEN LEVEL CHANGES
+
+    switch (this.screenText.level) {
+      case 1:
+        if (this.enemiesArr.length < 10) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 5), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 2:
+        if (this.enemiesArr.length < 15) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 4.8), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 3:
+        if (this.enemiesArr.length < 20) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(3, 4.8), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 4:
+        if (this.enemiesArr.length < 40) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2000),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(1.3, 2), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
+      case 5:
+        if (this.enemiesArr.length < 80) {
+          const enemy = new Enemy(
+            this,
+            generateRandomNumber(1000, 2500),
+            generateRandomNumber(0, 450),
+            50,
+            50,
+            generateRandomNumber(2, 3), //2.5, 4)
+            generateRandomNumber(0, 4)
+          );
+          this.enemiesArr.push(enemy);
+        }
+        break;
     }
 
     // Powerup
@@ -211,7 +338,7 @@ class Game {
         generateRandomNumber(0, 450),
         50,
         50,
-        generateRandomNumber(3, 4.5), //2.5, 4)
+        generateRandomNumber(3, 4.8), //2.5, 4)
         generateRandomNumber(0, 3)
       );
       this.powerupsArr.push(powerup);
@@ -229,9 +356,10 @@ class Game {
       }
     }
 
+    this.screenText.increaseLevel();
+
     // Game Over
     if (this.player.health <= 0) {
-      this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
       this.isRunning = false;
     }
@@ -277,6 +405,7 @@ class Game {
         this.loop();
       }, 1000 / 60);
     } else {
+      this.sounds.gameOverSound.play();
       this.screenText.printScore();
       alert(this.screenText.gameOverMessage);
     }

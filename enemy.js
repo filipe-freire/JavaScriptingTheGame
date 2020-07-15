@@ -9,20 +9,23 @@ class Enemy {
     this.speed = speed;
     this.spriteIndex = index;
 
-    this.spriteArr = [
-      '/img/java.png',
-      '/img/c-lang.png',
-      '/img/php-logo.png',
-      '/img/python.png',
-      '/img/ruby.png'
-    ];
-    this.image = new Image();
-    this.image.src = this.spriteArr[this.spriteIndex];
+    this.java = new Image();
+    this.java.src = '/img/java.png';
+    this.php = new Image();
+    this.php.src = '/img/php-logo.png';
+    this.cLang = new Image();
+    this.cLang.src = '/img/c-lang.png';
+    this.python = new Image();
+    this.python.src = '/img/python.png';
+    this.ruby = new Image();
+    this.ruby.src = '/img/ruby.png';
+
+    this.spriteArr = [this.java, this.php, this.cLang, this.python, this.ruby];
+
+    this.image = this.spriteArr[this.spriteIndex];
   }
 
   checkIntersection(item) {
-    // console.log(item.x, item.width, item.y, item.height);
-    // console.log(this.x, this.width, this.y, this.height);
     return (
       item.x + item.width > this.x &&
       item.x < this.x + this.width &&
