@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
   const game = new Game(canvasElement);
   const startButton = document.getElementById('startGame');
   let gameHasStarted = false;
-  const startGameSound = () => game.clickStartSound.play();
+  const startGameSound = () => game.sounds.clickStartSound.play();
   /*
   startButton.onclick = function startGane() {
     if (gameHasStarted === false) {

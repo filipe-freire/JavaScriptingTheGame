@@ -29,20 +29,7 @@ class Game {
     this.setKeyBindings();
 
     // ---- Sounds ----
-    // Start Game sound
-    this.clickStartSound = new Audio('/start-game-sound.wav');
-    // Game music
-    this.gameMusic = new Audio('/Jeremy Blake - Powerup 8-bit Music.mp3');
-    // Bullet being Fired
-    this.fireBulletSound = new Audio('/zap.flac');
-    // Bullet hitting enemy
-    this.bulletHittingEnemy = new Audio('/bullet-hits-enemy.wav');
-    // Enemy hits player
-    this.enemyHitsPlayerSound = new Audio('/enemy-hits-player.wav');
-    // Player Picks Powerup
-    this.playerPicksPowerup = new Audio('/picked-powerup.mp3');
-    // Game Over Sound
-    this.gameOverSound = new Audio('/game-over.wav');
+    this.sounds = new Sounds(this);
 
     // CONSTRUCTOR ENDS
   }
@@ -86,7 +73,7 @@ class Game {
   }
 
   playMusic() {
-    this.gameMusic.play();
+    this.sounds.gameMusic.play();
   }
 
   togglePause() {
@@ -122,7 +109,7 @@ class Game {
               const bullet = new Bullet(this);
               this.bullets.push(bullet);
               //console.log(this.bullets);
-              this.fireBulletSound.play();
+              this.sounds.fireBulletSound.play();
             } else {
               //console.log("You're out of bullets!");
             }
@@ -146,7 +133,7 @@ class Game {
 
       // check collision with player
       if (intersectingWithPlayer) {
-        this.enemyHitsPlayerSound.play();
+        this.sounds.enemyHitsPlayerSound.play();
         const index = this.enemiesArr.indexOf(enemy);
         this.enemiesArr.splice(index, 1);
         this.player.health -= 20;
@@ -157,7 +144,7 @@ class Game {
         const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
         // console.log(intersectingWithBullet);
         if (intersectingWithBullet) {
-          this.bulletHittingEnemy.play();
+          this.sounds.bulletHittingEnemy.play();
           this.screenText.enemiesEliminated += 1;
           const index = this.enemiesArr.indexOf(enemy);
           this.enemiesArr.splice(index, 1);
@@ -192,7 +179,7 @@ class Game {
 
       const intersectingWithPlayer = powerup.checkIntersection(this.player);
       if (intersectingWithPlayer) {
-        this.playerPicksPowerup.play();
+        this.sounds.playerPicksPowerup.play();
         const index = this.powerupsArr.indexOf(powerup);
         this.powerupsArr.splice(index, 1);
         // depending on the image src, give the player different abilities (ex increase movement speed, shield)
@@ -204,7 +191,7 @@ class Game {
         const intersectingWithBullet = powerup.checkIntersection(this.bullets[0]);
         // console.log(intersectingWithBullet);
         if (intersectingWithBullet) {
-          this.bulletHittingEnemy.play();
+          this.sounds.bulletHittingEnemy.play();
           const index = this.powerupsArr.indexOf(powerup);
           this.powerupsArr.splice(index, 1);
         }
@@ -244,8 +231,8 @@ class Game {
 
     // Game Over
     if (this.player.health <= 0) {
-      this.gameOverSound.play();
-      this.gameMusic.pause();
+      this.sounds.gameOverSound.play();
+      this.sounds.gameMusic.pause();
       this.isRunning = false;
     }
 
