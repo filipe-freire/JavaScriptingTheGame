@@ -17,11 +17,9 @@ class Game {
 
     // Enemies
     this.enemiesArr = [];
-    this.createEnemy();
 
     // Powerups
     this.powerupsArr = [];
-    this.createPowerup();
 
     // Bullets
     this.bullets = [];
@@ -36,118 +34,6 @@ class Game {
     this.sounds = new Sounds(this);
 
     // CONSTRUCTOR ENDS
-  }
-
-  createPowerup() {
-    if (this.powerupsArr.length < 3) {
-      const powerup = new Powerup(
-        this,
-        generateRandomNumber(1000, 1600),
-        generateRandomNumber(0, 450),
-        50,
-        50,
-        generateRandomNumber(3, 5), //2.5, 4)
-        generateRandomNumber(0, 3)
-      );
-      this.powerupsArr.push(powerup);
-    }
-
-    setTimeout(() => {
-      this.createPowerup();
-    }, 1000);
-  }
-
-  // CHANGE WHEN LEVEL CHANGES
-  createEnemy() {
-    switch (this.screenText.level) {
-      case 1:
-        if (this.enemiesArr.length < 10) {
-          const enemy = new Enemy(
-            this,
-            generateRandomNumber(1000, 2000),
-            generateRandomNumber(0, 450),
-            50,
-            50,
-            generateRandomNumber(3, 5), //2.5, 4)
-            generateRandomNumber(0, 4)
-          );
-          this.enemiesArr.push(enemy);
-          console.log(enemy);
-        }
-        break;
-      case 2:
-        if (this.enemiesArr.length < 15) {
-          const enemy = new Enemy(
-            this,
-            generateRandomNumber(1000, 2000),
-            generateRandomNumber(0, 450),
-            50,
-            50,
-            generateRandomNumber(3, 5), //2.5, 4)
-            generateRandomNumber(0, 4)
-          );
-          this.enemiesArr.push(enemy);
-        }
-        break;
-      case 3:
-        if (this.enemiesArr.length < 20) {
-          const enemy = new Enemy(
-            this,
-            generateRandomNumber(1000, 2000),
-            generateRandomNumber(0, 450),
-            50,
-            50,
-            generateRandomNumber(3, 5), //2.5, 4)
-            generateRandomNumber(0, 4)
-          );
-          this.enemiesArr.push(enemy);
-        }
-        break;
-      case 4:
-        if (this.enemiesArr.length < 40) {
-          const enemy = new Enemy(
-            this,
-            generateRandomNumber(1000, 2000),
-            generateRandomNumber(0, 450),
-            50,
-            50,
-            generateRandomNumber(1.3, 2), //2.5, 4)
-            generateRandomNumber(0, 4)
-          );
-          this.enemiesArr.push(enemy);
-        }
-        break;
-      case 5:
-        if (this.enemiesArr.length < 80) {
-          const enemy = new Enemy(
-            this,
-            generateRandomNumber(1000, 2000),
-            generateRandomNumber(0, 450),
-            50,
-            50,
-            generateRandomNumber(1.3, 2), //2.5, 4)
-            generateRandomNumber(0, 4)
-          );
-          this.enemiesArr.push(enemy);
-        }
-        break;
-      case 6: // ADD BOSS BATTLE
-        const enemy = new Enemy(
-          this,
-          generateRandomNumber(1000, 1200),
-          generateRandomNumber(0, 225),
-          300,
-          300,
-          generateRandomNumber(0.9, 1.1), //2.5, 4)
-          5
-        );
-        this.enemiesArr.push(enemy);
-        break;
-    }
-
-    // setTimeout(() => {
-    //   this.createEnemy();
-    // }, 1000);
   }
 
   playMusic() {
@@ -209,8 +95,11 @@ class Game {
       this.isRunning = false;
     }
 
+    /* if (this.screenText.level === 6) {
+      
+    } */
     // enemy run logic
-    if (this.screenText.level === 6) {
+    /*  {
       for (let enemy of this.enemiesArr) {
         enemy.runLogic();
 
@@ -219,7 +108,7 @@ class Game {
         // check collision with player
         if (intersectingWithPlayer) {
           this.sounds.enemyHitsPlayerSound.play();
-          this.player.health = 0; // add game-over directly
+          this.player.health -= 10; //
         }
 
         // check collision with bullet
@@ -232,7 +121,6 @@ class Game {
               this.sounds.bulletHittingEnemy.play();
               this.bullets.splice(index, 1);
               this.bullet.bulletBossCounter++;
-              console.log(this.bullet.bulletBossCounter);
             }
             if (this.bullet.bulletBossCounter === 50) {
               const index = this.enemiesArr.indexOf(enemy);
@@ -242,46 +130,45 @@ class Game {
           });
         }
       }
-    } else {
-      // all the other levels
-      for (let enemy of this.enemiesArr) {
-        enemy.runLogic();
+    } else { */
+    // all the other levels
+    for (let enemy of this.enemiesArr) {
+      enemy.runLogic();
 
-        const intersectingWithPlayer = enemy.checkIntersection(this.player);
+      const intersectingWithPlayer = enemy.checkIntersection(this.player);
 
-        // check collision with player
-        if (intersectingWithPlayer) {
-          this.sounds.enemyHitsPlayerSound.play();
-          const index = this.enemiesArr.indexOf(enemy);
-          this.enemiesArr.splice(index, 1);
-          this.player.health -= 20;
-        }
+      // check collision with player
+      if (intersectingWithPlayer) {
+        this.sounds.enemyHitsPlayerSound.play();
+        const index = this.enemiesArr.indexOf(enemy);
+        this.enemiesArr.splice(index, 1);
+        this.player.health -= 20;
+      }
 
-        // check collision with bullet
-        if (this.bullets.length > 0) {
-          const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
-          // console.log(intersectingWithBullet);
-          if (intersectingWithBullet) {
-            this.sounds.bulletHittingEnemy.play();
-            this.screenText.enemiesEliminated += 1;
-            const index = this.enemiesArr.indexOf(enemy);
-            this.enemiesArr.splice(index, 1);
-          }
-        }
-
-        // eleminate enemy from array if it goes off canvas
-        if (enemy.x + enemy.width < 0) {
+      // check collision with bullet
+      if (this.bullets.length > 0) {
+        const intersectingWithBullet = enemy.checkIntersection(this.bullets[0]);
+        // console.log(intersectingWithBullet);
+        if (intersectingWithBullet) {
+          this.sounds.bulletHittingEnemy.play();
+          this.screenText.enemiesEliminated += 1;
           const index = this.enemiesArr.indexOf(enemy);
           this.enemiesArr.splice(index, 1);
         }
+      }
+
+      // eleminate enemy from array if it goes off canvas
+      if (enemy.x + enemy.width < 0) {
+        const index = this.enemiesArr.indexOf(enemy);
+        this.enemiesArr.splice(index, 1);
       }
     }
 
     // push a new enemy into the enemiesArr whenever one is taken out of the game
     // Add New Levels here
-
     switch (this.screenText.level) {
       case 1:
+        console.log(this.screenText.level);
         if (this.enemiesArr.length < 10) {
           const enemy = new Enemy(
             this,
@@ -296,6 +183,8 @@ class Game {
         }
         break;
       case 2:
+        console.log(this.screenText.level);
+
         if (this.enemiesArr.length < 15) {
           const enemy = new Enemy(
             this,
@@ -310,6 +199,8 @@ class Game {
         }
         break;
       case 3:
+        console.log(this.screenText.level);
+
         if (this.enemiesArr.length < 20) {
           const enemy = new Enemy(
             this,
@@ -324,6 +215,8 @@ class Game {
         }
         break;
       case 4:
+        console.log(this.screenText.level);
+
         if (this.enemiesArr.length < 40) {
           const enemy = new Enemy(
             this,
@@ -338,6 +231,8 @@ class Game {
         }
         break;
       case 5:
+        console.log(this.screenText.level);
+
         if (this.enemiesArr.length < 80) {
           const enemy = new Enemy(
             this,
@@ -352,15 +247,17 @@ class Game {
         }
         break;
       case 6: // ADD BOSS BATTLE
+        console.log(this.screenText.level);
+
         if (this.enemiesArr.length < 1) {
           const enemy = new Enemy(
             this,
-            generateRandomNumber(1000, 2500),
+            generateRandomNumber(1000, 1200),
             generateRandomNumber(0, 450),
-            50,
-            50,
+            200,
+            200,
             generateRandomNumber(2, 3), //2.5, 4)
-            generateRandomNumber(0, 4)
+            5
           );
           this.enemiesArr.push(enemy);
         }
@@ -474,7 +371,8 @@ class Game {
       }, 1000 / 60);
     } else {
       this.sounds.gameOverSound.play();
-      this.screenText.printScore();
+      this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
+      this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
       alert(this.screenText.gameOverMessage);
     }
   }

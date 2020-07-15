@@ -13,7 +13,6 @@ class Screentext {
     switch (this.enemiesEliminated) {
       case 10:
         this.level = 2;
-        console.log('level 2');
         break;
       case 20:
         this.level = 3;
@@ -24,22 +23,16 @@ class Screentext {
       case 40:
         this.level = 5;
         break;
-      case 80:
+      case 50:
         this.level = 6;
         break;
     }
   }
 
   printScore() {
-    if (this.score >= 60) {
-      this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${
-        Math.floor(this.score) / 60
-      } minutes and eliminate ${this.enemiesEliminated} threats!`;
-    } else {
-      this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
-        this.score
-      )} seconds and eliminate ${this.enemiesEliminated} threats!`;
-    }
+    this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
+      this.score
+    )} seconds and eliminate ${this.enemiesEliminated} threats!`;
   }
 
   createHud() {
