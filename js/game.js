@@ -29,6 +29,7 @@ class Game {
   }
 
   playMusic() {
+    this.sounds.gameMusic.volume = 0.3;
     this.sounds.gameMusic.play();
   }
 
@@ -218,7 +219,7 @@ class Game {
     }
 
     if (this.screenText.level === 7) {
-      // add GameOver
+      this.isRunning = false;
     }
 
     for (let enemy of this.enemiesArr) {
@@ -364,6 +365,12 @@ class Game {
         this.loop();
       }, 1000 / 60);
     } else {
+      if (this.screenText.level === 7) {
+        this.sounds.gameOverSound.play();
+        this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
+        this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
+        alert(this.screenText.gameOverMessage);
+      }
       this.sounds.gameOverSound.play();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
       this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);

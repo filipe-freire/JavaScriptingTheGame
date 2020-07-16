@@ -33,9 +33,17 @@ class Screentext {
   }
 
   printScore() {
-    this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
-      this.score
-    )} seconds and eliminate ${this.enemiesEliminated} threats!`;
+    if (this.level === 7) {
+      this.gameOverMessage = `Congratulations! You managed to keep your code integrity from collapsing for ${Math.floor(
+        this.score
+      )} seconds, eliminate ${
+        this.enemiesEliminated
+      } threats and defeat the final boss!! Well done 😎`;
+    } else {
+      this.gameOverMessage = `Game Over! You managed to keep your code integrity from collapsing for ${Math.floor(
+        this.score
+      )} seconds and eliminate ${this.enemiesEliminated} threats!`;
+    }
   }
 
   createHud() {

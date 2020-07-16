@@ -16,22 +16,36 @@ h1 {
   filter: drop-shadow(0 0 0.75rem rgb(255, 231, 14));
 }
 
-html,
 body {
-  height: 100%;
+  min-height: 1200px;
   font-family: 'Anonymous Pro', monospace;
-}
-
-body {
   background-color: #131104;
   background-image: url('/img/background3.jpg');
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* padding: 2em; */
+}
+
+.footer-wrapper {
+  width: 100%;
+  padding: 1em 0;
+  background: #000000fa;
+  margin-top: 7em;
+}
+
+footer {
+  color: #fff;
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+  /* border: 1px solid #7e7c0b; */
+
+  text-align: center;
 }
 
 .container {
+  margin: 1em 0;
   /* display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,7 +57,6 @@ body {
 }
 
 .game-intro {
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,8 +66,9 @@ body {
   color: #fff;
   margin: 0 auto 2em;
   background-color: #000000bb;
-  padding: 2em 1em;
+  padding: 1.5em 1em;
   border: 2px solid #7e7c0b;
+  border-radius: 10px;
 }
 
 .game-intro > p {
@@ -63,6 +77,7 @@ body {
   line-height: 1.1;
   font-size: 1.2em;
   text-align: center;
+  line-height: 1.5;
 }
 
 .bullet-number {
@@ -71,10 +86,17 @@ body {
   color: #f3f168;
 }
 
+.wrapper {
+  /* position: relative; */
+  height: 500px;
+
+  margin-bottom: 2em;
+}
+
 canvas {
   background: url('/img/game-background2.jpg') no-repeat center center/cover;
-  box-shadow: 0px 0px 15px 2px rgba(221, 214, 74, 0.507);
-  border: 2px groove #eee9d0;
+  box-shadow: 0px 0px 15px 2px rgba(250, 245, 151, 0.548);
+  border: 1px groove #eee9d0;
   border-radius: 5px;
 }
 
@@ -100,10 +122,4 @@ canvas {
   background-color: #000000;
   color: #fff;
   font-size: 3em;
-}
-
-.wrapper {
-  position: relative;
-
-  margin-bottom: 2em;
 }
