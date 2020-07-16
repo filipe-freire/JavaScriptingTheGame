@@ -374,19 +374,15 @@ class Game {
       this.sounds.gameMusic.pause();
       this.sounds.winGameSound.play();
       this.screenText.printScore();
-      this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
       this.startButton.style.display = 'none';
+      this.screenText.printGameOverScreen();
       console.log(this.screenText.gameOverMessage);
-      // } else if (!this.isRunning) {
-      //   game.clean();
     } else {
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
-      this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
-
+      this.screenText.printGameOverScreen();
       console.log(this.screenText.gameOverMessage);
-      // add check if is running here
       this.checkIfRunning();
     }
   }

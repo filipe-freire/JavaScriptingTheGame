@@ -32,6 +32,36 @@ class Screentext {
     }
   }
 
+  printGameOverScreen() {
+    const context = this.game.context;
+
+    if (this.game.gameOver && this.level === 7 && this.game.player.health > 0) {
+      context.fillStyle = 'black';
+
+      context.fillRect(0, 0, 1000, 600);
+
+      context.fillStyle = 'orange';
+      context.font = '60px "Yatra One"';
+      context.fillText(`!Congratulations! You Win! 🏆`, 50, 250);
+
+      context.font = '30px "Yatra One"';
+      context.fillText(`Final Score: ${Math.floor(this.score)}`, 150, 400);
+      context.fillText(`Enemies blasted: ${this.enemiesEliminated}`, 600, 400);
+
+      context.fillStyle = 'black';
+    } else {
+      context.fillStyle = 'black';
+      context.fillRect(0, 0, 1000, 600);
+      context.fillStyle = 'orange';
+      context.font = '60px "Yatra One"';
+      context.fillText(`Game Over!`, 325, 250);
+      context.font = '30px "Yatra One"';
+      context.fillText(`Final Score: ${Math.floor(this.score)}`, 150, 400);
+      context.fillText(`Enemies blasted: ${this.enemiesEliminated}`, 600, 400);
+      context.fillStyle = 'black';
+    }
+  }
+
   printScore() {
     if (this.level === 7) {
       this.gameOverMessage = `Congratulations! You managed to keep your code integrity from collapsing for ${Math.floor(
@@ -71,7 +101,7 @@ class Screentext {
   paint() {
     const context = this.game.context;
     // const score = seconds since game loads
-    this.hud = this.createHud();
+    this.createHud();
 
     context.save();
 
