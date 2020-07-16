@@ -32,12 +32,12 @@ class Game {
 
   checkIfRunning() {
     if (this.isRunning) {
-      console.log(`isRunning is ${this.isRunning}`);
+      //console.log(`isRunning is ${this.isRunning}`);
       setTimeout(() => {
         this.checkIfRunning();
       }, 1000 / 60);
     } else {
-      console.log(`isRunning is ${this.isRunning}`);
+      //console.log(`isRunning is ${this.isRunning}`);
       this.loop();
     }
   }
@@ -377,6 +377,7 @@ class Game {
       this.startButton.style.display = 'none';
       this.screenText.printGameOverScreen();
       console.log(this.screenText.gameOverMessage);
+      this.checkIfRunning();
     } else {
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
