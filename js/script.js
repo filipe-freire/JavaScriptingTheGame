@@ -7,6 +7,8 @@ window.addEventListener('load', () => {
   let gameHasStarted = false;
   const startGameSound = () => game.sounds.clickStartSound.play();
 
+  const resetGame = () => {};
+
   game.startButton.addEventListener('click', function () {
     if (gameHasStarted === false) {
       startGameSound();
@@ -20,7 +22,5 @@ window.addEventListener('load', () => {
     }
   });
 
-  newGameButton.addEventListener('click', function () {
-    // Add new game functionality here
-  });
+  newGameButton.addEventListener('click', function () {});
 });

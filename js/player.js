@@ -5,8 +5,8 @@ class Player {
     this.x = 25;
     this.y = 25;
 
-    this.width = 50;
-    this.height = 50;
+    this.width = 70;
+    this.height = 70;
 
     this.health = 200;
 
