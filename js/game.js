@@ -38,6 +38,7 @@ class Game {
       }, 1000 / 60);
     } else {
       //console.log(`isRunning is ${this.isRunning}`);
+      this.startButton.style.display = 'inline-block';
       this.loop();
     }
   }
@@ -381,6 +382,7 @@ class Game {
       this.checkIfRunning();
     } else {
       this.screenText.calculateFinalScore();
+      this.startButton.style.display = 'none';
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
