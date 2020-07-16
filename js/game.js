@@ -29,7 +29,6 @@ class Game {
   }
 
   playMusic() {
-    this.sounds.gameMusic.volume = 0.3;
     this.sounds.gameMusic.play();
   }
 
@@ -37,9 +36,11 @@ class Game {
     if (!this.isPaused) {
       this.startButton.innerHTML = 'Start';
       this.isPaused = true;
+      this.sounds.gameMusic.pause();
     } else if (this.isPaused) {
       this.startButton.innerHTML = 'Pause';
       this.isPaused = false;
+      this.sounds.gameMusic.play();
     }
   }
 
