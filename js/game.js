@@ -7,6 +7,7 @@ class Game {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.startButton = document.getElementById('startGame');
+    this.newGameButton = document.getElementById('newGame');
 
     this.player = new Player(this);
     this.bullet = new Bullet(this);
@@ -23,6 +24,7 @@ class Game {
     // Game Over
     this.isRunning = true;
     this.isPaused = false;
+    this.gameOver = false;
     this.setKeyBindings();
     // ---- Sounds ----
     this.sounds = new Sounds(this);
@@ -89,7 +91,6 @@ class Game {
     // Add New Levels here
     switch (this.screenText.level) {
       case 1:
-        console.log(this.screenText.level);
         if (this.enemiesArr.length < 10) {
           const enemy = new Enemy(
             this,
@@ -97,7 +98,7 @@ class Game {
             generateRandomNumber(0, 450),
             50,
             50,
-            generateRandomNumber(3, 5), //2.5, 4)
+            generateRandomNumber(2, 2.5), //2.5, 4)
             generateRandomNumber(0, 4)
           );
           this.enemiesArr.push(enemy);
@@ -113,7 +114,7 @@ class Game {
             generateRandomNumber(0, 450),
             50,
             50,
-            generateRandomNumber(3, 4.8), //2.5, 4)
+            generateRandomNumber(2.5, 4), //2.5, 4)
             generateRandomNumber(0, 4)
           );
           this.enemiesArr.push(enemy);
@@ -129,15 +130,13 @@ class Game {
             generateRandomNumber(0, 450),
             50,
             50,
-            generateRandomNumber(3, 4.8), //2.5, 4)
+            generateRandomNumber(3, 4.5), //2.5, 4)
             generateRandomNumber(0, 4)
           );
           this.enemiesArr.push(enemy);
         }
         break;
       case 4:
-        console.log(this.screenText.level);
-
         if (this.enemiesArr.length < 40) {
           const enemy = new Enemy(
             this,
@@ -152,8 +151,6 @@ class Game {
         }
         break;
       case 5:
-        console.log(this.screenText.level);
-
         if (this.enemiesArr.length < 80) {
           const enemy = new Enemy(
             this,
@@ -161,7 +158,7 @@ class Game {
             generateRandomNumber(0, 450),
             50,
             50,
-            generateRandomNumber(2, 3), //2.5, 4)
+            generateRandomNumber(2, 2.5), //2.5, 4)
             generateRandomNumber(0, 4)
           );
           this.enemiesArr.push(enemy);
@@ -179,7 +176,7 @@ class Game {
             generateRandomNumber(0, 350),
             200,
             200,
-            1.5, //2.5, 4)
+            1.3, //2.5, 4)
             5
           );
           this.bossArr.push(enemy);
@@ -213,14 +210,14 @@ class Game {
           if (this.bullet.bulletBossCounter === 30) {
             const index = this.bossArr.indexOf(boss);
             this.bossArr.splice(index, 1);
-            this.screenText.level++;
+            this.screenText.level = 7;
           }
         });
       }
     }
 
     if (this.screenText.level === 7) {
-      this.isRunning = false;
+      this.gameOver = true;
     }
 
     for (let enemy of this.enemiesArr) {
@@ -317,7 +314,7 @@ class Game {
     // Game Over
     if (this.player.health <= 0) {
       this.sounds.gameMusic.pause();
-      this.isRunning = false;
+      this.gameOver = true;
     }
 
     // Update Score
@@ -361,16 +358,25 @@ class Game {
     // Paint
     this.paint();
 
-    if (this.isRunning) {
+    if (!this.gameOver) {
       setTimeout(() => {
         this.loop();
       }, 1000 / 60);
+    } else if (this.gameOver && this.screenText.level === 7 && this.player.health > 0) {
+      this.sounds.gameMusic.pause();
+      this.sounds.winGameSound.play();
+      this.screenText.printScore();
+      this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
+      console.log(this.screenText.gameOverMessage);
+    } else if (!this.isRunning) {
+      game.clean();
     } else {
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
       this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
-      alert(this.screenText.gameOverMessage);
+
+      console.log(this.screenText.gameOverMessage);
     }
   }
 }

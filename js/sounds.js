@@ -18,10 +18,13 @@ class Sounds {
     this.enemyHitsPlayerSound = new Audio('/sounds/enemy-hits-player.wav');
     this.enemyHitsPlayerSound.volume = 0.5;
     // Player Picks Powerup
-    this.playerPicksPowerup = new Audio('/sounds/picked-powerup.mp3');
+    this.playerPicksPowerup = new Audio('/sounds/picked-powerup.wav');
     this.playerPicksPowerup.volume = 0.3;
     // Game Over Sound
     this.gameOverSound = new Audio('/sounds/game-over.wav');
     this.gameOverSound.volume = 0.3;
+    // Win Game
+    this.winGameSound = new Audio('/sounds/tada-sound.mp3');
+    this.winGameSound.volume = 0.4;
   }
 }
