@@ -133,6 +133,14 @@ footer > p + p {
   color: #f3f168;
 }
 
+#final-message {
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 1.7em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #f3f168;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
