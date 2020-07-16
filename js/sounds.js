@@ -9,7 +9,7 @@ class Sounds {
     this.gameMusic = new Audio('/sounds/Jeremy Blake - Powerup 8-bit Music.mp3');
     this.gameMusic.volume = 0.5;
     // Bullet being Fired
-    this.fireBulletSound = new Audio('/sounds/zap.flac');
+    this.fireBulletSound = new Audio('/sounds/zap.wav');
     this.fireBulletSound.volume = 0.3;
     // Bullet hitting enemy
     this.bulletHittingEnemy = new Audio('/sounds/bullet-hits-enemy.wav');

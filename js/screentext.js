@@ -13,7 +13,7 @@ class Screentext {
   }
 
   increaseLevel() {
-    switch (this.enemiesEliminated) {
+    switch (Math.floor(this.score)) {
       case 10:
         this.level = 2;
         break;

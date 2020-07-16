@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
   const startGameSound = () => game.sounds.clickStartSound.play();
 
   const resetGame = () => {
-    game.isRunning = true;
+    game.isRunning = false;
     game.isPaused = false;
     game.gameOver = false;
 
@@ -39,12 +39,13 @@ window.addEventListener('load', () => {
       game.startButton.innerHTML = 'Pause';
       game.loop();
     } else {
+      startGameSound();
       game.togglePause();
     }
   });
 
   newGameButton.addEventListener('click', function () {
-    game.isRunning = false;
+    startGameSound();
     resetGame();
     game.togglePause();
     game.sounds.gameMusic.currentTime = 0;

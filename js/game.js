@@ -30,6 +30,18 @@ class Game {
     this.sounds = new Sounds(this);
   }
 
+  checkIfRunning() {
+    if (this.isRunning) {
+      console.log(`isRunning is ${this.isRunning}`);
+      setTimeout(() => {
+        this.checkIfRunning();
+      }, 1000 / 60);
+    } else {
+      console.log(`isRunning is ${this.isRunning}`);
+      this.loop();
+    }
+  }
+
   playMusic() {
     this.sounds.gameMusic.play();
   }
@@ -105,8 +117,6 @@ class Game {
         }
         break;
       case 2:
-        console.log(this.screenText.level);
-
         if (this.enemiesArr.length < 15) {
           const enemy = new Enemy(
             this,
@@ -121,8 +131,6 @@ class Game {
         }
         break;
       case 3:
-        console.log(this.screenText.level);
-
         if (this.enemiesArr.length < 20) {
           const enemy = new Enemy(
             this,
@@ -367,9 +375,10 @@ class Game {
       this.sounds.winGameSound.play();
       this.screenText.printScore();
       this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
+      this.startButton.style.display = 'none';
       console.log(this.screenText.gameOverMessage);
-    } else if (!this.isRunning) {
-      game.clean();
+      // } else if (!this.isRunning) {
+      //   game.clean();
     } else {
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
@@ -377,6 +386,8 @@ class Game {
       this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
 
       console.log(this.screenText.gameOverMessage);
+      // add check if is running here
+      this.checkIfRunning();
     }
   }
 }
