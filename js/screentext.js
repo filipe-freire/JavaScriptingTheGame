@@ -78,7 +78,11 @@ class Screentext {
     context.fillStyle = 'orange';
     context.font = '50px "Yatra One"';
 
-    context.fillText(`LEVEL ${this.level}`, 380, 570);
+    if (this.level === 7) {
+      context.fillText(`Game Over!`, 350, 570);
+    } else {
+      context.fillText(`LEVEL ${this.level}`, 380, 570);
+    }
 
     if (this.level === 6) {
       this.bossBattleWarningDisplay();

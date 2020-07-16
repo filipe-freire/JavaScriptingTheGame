@@ -175,8 +175,8 @@ class Game {
         if (this.enemiesArr.length < 1 && this.bossArr.length < 1) {
           const enemy = new Enemy(
             this,
-            generateRandomNumber(1000, 1200),
-            generateRandomNumber(0, 450),
+            1500,
+            generateRandomNumber(0, 350),
             200,
             200,
             1.5, //2.5, 4)
@@ -366,13 +366,8 @@ class Game {
         this.loop();
       }, 1000 / 60);
     } else {
-      if (this.screenText.level === 7) {
-        this.sounds.gameOverSound.play();
-        this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
-        this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
-        alert(this.screenText.gameOverMessage);
-      }
       this.sounds.gameOverSound.play();
+      this.sounds.gameMusic.pause();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
       this.highscore.push([this.screenText.score, this.screenText.enemiesEliminated]);
       alert(this.screenText.gameOverMessage);
