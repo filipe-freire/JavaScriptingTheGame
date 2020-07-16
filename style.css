@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yatra+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
 
 *,
 ::before,
@@ -39,9 +40,19 @@ footer {
   color: #fff;
   padding: 0.5em 1em;
   font-size: 1.5em;
-  /* border: 1px solid #7e7c0b; */
-
   text-align: center;
+}
+
+footer > p > span {
+  color: #ecd448;
+  font-size: 1.3em;
+  font-family: 'Dancing Script', 'Anonymous Pro', monospace;
+}
+
+footer > p + p {
+  margin-top: 1.5em;
+  font-style: italic;
+  font-size: 0.7em;
 }
 
 .container {

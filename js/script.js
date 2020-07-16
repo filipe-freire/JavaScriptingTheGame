@@ -7,10 +7,6 @@ window.addEventListener('load', () => {
   let gameHasStarted = false;
   const startGameSound = () => game.sounds.clickStartSound.play();
 
-  // startNewGame() {
-
-  // }
-
   game.startButton.addEventListener('click', function () {
     if (gameHasStarted === false) {
       startGameSound();
@@ -18,20 +14,13 @@ window.addEventListener('load', () => {
       gameHasStarted = true;
       game.startButton.innerHTML = 'Pause';
       game.loop();
+      newGameButton.style.display = 'block';
     } else {
       game.togglePause();
     }
   });
 
   newGameButton.addEventListener('click', function () {
-    if (gameHasStarted === false) {
-      startGameSound();
-      game.playMusic();
-      gameHasStarted = true;
-      game.startButton.innerHTML = 'Pause';
-      game.loop();
-    } else {
-      game.togglePause();
-    }
+    // Add new game functionality here
   });
 });
