@@ -2,6 +2,8 @@ class Screentext {
   constructor(game) {
     this.game = game;
 
+    this.finalScore;
+
     this.level = 1;
     this.score = 0;
     this.enemiesEliminated = 0;
@@ -32,6 +34,10 @@ class Screentext {
     }
   }
 
+  calculateFinalScore() {
+    this.finalScore = this.score + this.enemiesEliminated;
+  }
+
   printGameOverScreen() {
     const context = this.game.context;
 
@@ -45,8 +51,10 @@ class Screentext {
       context.fillText(`!Congratulations! You Win! 🏆`, 50, 250);
 
       context.font = '30px "Yatra One"';
-      context.fillText(`Final Score: ${Math.floor(this.score)}`, 150, 400);
-      context.fillText(`Enemies blasted: ${this.enemiesEliminated}`, 600, 400);
+      context.fillText(`Points: ${Math.floor(this.score)}`, 130, 400);
+      context.fillText(`Languages blasted: ${this.enemiesEliminated}`, 620, 400);
+      context.font = '40px "Yatra One"';
+      context.fillText(`Final Score: ${Math.floor(this.finalScore)}`, 350, 500);
 
       context.fillStyle = 'black';
     } else {
@@ -54,10 +62,12 @@ class Screentext {
       context.fillRect(0, 0, 1000, 600);
       context.fillStyle = 'orange';
       context.font = '60px "Yatra One"';
-      context.fillText(`Game Over!`, 325, 250);
+      context.fillText(`Game Over!`, 325, 220);
       context.font = '30px "Yatra One"';
-      context.fillText(`Final Score: ${Math.floor(this.score)}`, 150, 400);
-      context.fillText(`Enemies blasted: ${this.enemiesEliminated}`, 600, 400);
+      context.fillText(`Points: ${Math.floor(this.score)}`, 130, 400);
+      context.fillText(`Languages blasted: ${this.enemiesEliminated}`, 620, 400);
+      context.font = '40px "Yatra One"';
+      context.fillText(`Final Score: ${Math.floor(this.finalScore)}`, 350, 500);
       context.fillStyle = 'black';
     }
   }

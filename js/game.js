@@ -371,6 +371,7 @@ class Game {
         this.loop();
       }, 1000 / 60);
     } else if (this.gameOver && this.screenText.level === 7 && this.player.health > 0) {
+      this.screenText.calculateFinalScore();
       this.sounds.gameMusic.pause();
       this.sounds.winGameSound.play();
       this.screenText.printScore();
@@ -379,6 +380,7 @@ class Game {
       console.log(this.screenText.gameOverMessage);
       this.checkIfRunning();
     } else {
+      this.screenText.calculateFinalScore();
       this.sounds.gameOverSound.play();
       this.sounds.gameMusic.pause();
       this.screenText.printScore(); // writes message to the gameOverMessage | may need to be deleted after changing game over mechanism
