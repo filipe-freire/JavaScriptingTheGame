@@ -24,9 +24,7 @@ class Bullet {
 
     context.save();
 
-    //this.image.addEventListener('load', () => {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
-    //});
 
     context.restore();
   }

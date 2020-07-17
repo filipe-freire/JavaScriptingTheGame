@@ -66,13 +66,13 @@ class Game {
         case 'ArrowUp':
           if (!this.isPaused) {
             event.preventDefault();
-            this.player.y -= 20;
+            this.player.y -= this.player.movementSpeed;
             break;
           }
         case 'ArrowDown':
           if (!this.isPaused) {
             event.preventDefault();
-            this.player.y += 20;
+            this.player.y += this.player.movementSpeed;
             break;
           }
         case 'b':
@@ -261,7 +261,7 @@ class Game {
       }
     }
 
-    // Powerup
+    // POWERUPS
 
     for (let powerup of this.powerupsArr) {
       powerup.runLogic();
@@ -272,7 +272,24 @@ class Game {
         const index = this.powerupsArr.indexOf(powerup);
         this.powerupsArr.splice(index, 1);
         // depending on the image src, give the player different abilities (ex increase movement speed, shield)
-        this.bullet.bulletsLeft += 1;
+        switch (powerup.image) {
+          case powerup.spriteArr[0]:
+            this.player.health += 50;
+            break;
+          case powerup.spriteArr[1]:
+            if (this.player.movementSpeed <= 30) {
+              this.player.movementSpeed += 1;
+            }
+            break;
+          case powerup.spriteArr[2]:
+            // fire more bullets
+            this.bullet.bulletsLeft += 3;
+            break;
+          default:
+            // TypeScript & VueY - Adds Ammo
+            this.bullet.bulletsLeft++;
+            break;
+        }
       }
 
       // check collision with bullet

@@ -12,6 +12,7 @@ window.addEventListener('load', () => {
     game.isPaused = false;
     game.gameOver = false;
 
+    game.player.movementSpeed = 15;
     game.player.x = 25;
     game.player.y = 25;
     game.player.health = 200;
@@ -22,6 +23,7 @@ window.addEventListener('load', () => {
     game.enemiesArr = [];
     game.bossArr = [];
     game.powerupsArr = [];
+    game.vuesPicked = [];
     game.bullets = [];
     game.screenText.level = 1;
     game.screenText.score = 0;

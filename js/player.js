@@ -2,6 +2,8 @@ class Player {
   constructor(game) {
     this.game = game;
 
+    this.movementSpeed = 15;
+
     this.x = 25;
     this.y = 25;
 
