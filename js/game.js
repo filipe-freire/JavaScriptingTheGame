@@ -39,6 +39,9 @@ class Game {
     } else {
       //console.log(`isRunning is ${this.isRunning}`);
       this.startButton.style.display = 'inline-block';
+      this.gameOver = false;
+      this.isPaused = true;
+      this.isRunning = true;
       this.loop();
     }
   }
