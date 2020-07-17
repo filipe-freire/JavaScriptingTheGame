@@ -66,13 +66,13 @@ class Game {
         case 'ArrowUp':
           if (!this.isPaused) {
             event.preventDefault();
-            this.player.y -= 10;
+            this.player.y -= 20;
             break;
           }
         case 'ArrowDown':
           if (!this.isPaused) {
             event.preventDefault();
-            this.player.y += 10;
+            this.player.y += 20;
             break;
           }
         case 'b':
