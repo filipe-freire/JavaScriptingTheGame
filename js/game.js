@@ -396,7 +396,7 @@ class Game {
       this.sounds.gameMusic.pause();
       this.sounds.winGameSound.play();
       this.screenText.printScore();
-      this.startButton.style.display = 'none';
+      //this.startButton.style.display = 'none';
       this.screenText.printGameOverScreen();
       console.log(this.screenText.gameOverMessage);
       this.checkIfRunning();
