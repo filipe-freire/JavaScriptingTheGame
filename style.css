@@ -19,6 +19,7 @@ h1 {
   font-size: 3em;
   font-family: 'Black Ops One', sans-serif;
   filter: drop-shadow(0 0 0.75rem rgb(255, 231, 14));
+  text-align: center;
 }
 
 body {
@@ -80,6 +81,13 @@ footer > p + p {
   border: 2px dashed #e7c012;
   border-radius: 10px;
   text-align: center;
+}
+
+.info-container {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .game-characters > h1 {
@@ -186,4 +194,9 @@ canvas {
 
 .flex + .flex {
   margin-top: 1em;
+}
+
+#do-info {
+  font-size: 1em;
+  font-style: italic;
 }

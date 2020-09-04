@@ -10,18 +10,9 @@
   <body>
     <main class="container">
       <div class="game-intro-section">
-        <div class="keyboard-controls">
-          <h1>Controls</h1>
-          <p><b>Arrow Up</b> - Move Up</p>
-          <p><b>Arrow Down</b> - Move Down</p>
-          <p><b>B</b> - Shoot Errors</p>
-          <p><b>Q</b> - Pause Game</p>
-        </div>
         <div class="game-intro">
           <h1>JavaScriptin' - The Game!</h1>
-          <p>
-            Hello JS warrior! Are you ready to be Javascriptin' ? 🚀
-          </p>
+          <p>Hello JS warrior! Are you ready to be Javascriptin' ? 🚀</p>
           <p>
             A group of rogue programming languages broke into your files and are trying to damage
             your code by inserting their own, turning yours into pure giberish!! We can't let that
@@ -37,30 +28,40 @@
           </p>
           <p>Be on the lookout for incoming JS libraries and frameworks for more ammo.</p>
           <p id="final-message">🤖Are you ready? Let's go!🤖</p>
+          <p id="do-info"><sup>*</sup>Game playable desktop only!</p>
+          <div class="info-container">
+            <div class="keyboard-controls">
+              <h1>Controls</h1>
+              <p><b>Arrow Up</b> - Move Up</p>
+              <p><b>Arrow Down</b> - Move Down</p>
+              <p><b>B</b> - Shoot Errors</p>
+              <p><b>Q</b> - Pause Game</p>
+            </div>
+            <div class="game-characters">
+              <h1>Powerups</h1>
+              <div class="powerups">
+                <div class="flex">
+                  <img src="/img/powerups/angular.png" alt="" />
+                  <p>+ 50 code integrity points</p>
+                </div>
+                <div class="flex">
+                  <img src="/img/powerups/react.png" alt="" />
+                  <p>Improves player's speed</p>
+                </div>
+                <div class="flex">
+                  <img src="/img/powerups/vuejs.png" alt="" />
+                  <p>+ 3 ERROR 404's</p>
+                </div>
+                <div class="flex">
+                  <img src="/img/powerups/TS.png" alt="" />
+                  <p>+ 1 ERROR 404</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <button id="newGame">New Game</button>
             <button id="startGame">Play</button>
-          </div>
-        </div>
-        <div class="game-characters">
-          <h1>Powerups</h1>
-          <div class="powerups">
-            <div class="flex">
-              <img src="/img/powerups/angular.png" alt="" />
-              <p>+ 50 code integrity points</p>
-            </div>
-            <div class="flex">
-              <img src="/img/powerups/react.png" alt="" />
-              <p>Improves player's speed</p>
-            </div>
-            <div class="flex">
-              <img src="/img/powerups/vuejs.png" alt="" />
-              <p>+ 3 ERROR 404's</p>
-            </div>
-            <div class="flex">
-              <img src="/img/powerups/TS.png" alt="" />
-              <p>+ 1 ERROR 404</p>
-            </div>
           </div>
         </div>
       </div>
@@ -74,9 +75,7 @@
           Made with joy, sweat and tears by <span>Filipe Freire</span> as Ironhack's WebDev Bootcamp
           Project 1.
         </p>
-        <p>
-          Music: Jeremy Blake - !Powerup;
-        </p>
+        <p>Music: Jeremy Blake - !Powerup;</p>
       </footer>
     </div>
     <script src="/js/enemy.js"></script>
