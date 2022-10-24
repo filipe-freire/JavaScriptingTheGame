@@ -1,5 +1,4 @@
 # JavaScript-Adventure-Game
-This repo holds the 1st Ironhack's bootcamp project. 
 
 ## Tech Used
 
