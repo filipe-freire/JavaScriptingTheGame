@@ -51,6 +51,5 @@ window.addEventListener('load', () => {
     resetGame();
     game.togglePause();
     game.sounds.gameMusic.currentTime = 0;
-    //newGameButton.style.display = 'none';
   });
 });

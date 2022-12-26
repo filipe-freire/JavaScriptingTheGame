@@ -48,7 +48,7 @@ class Screentext {
 
       context.fillStyle = 'orange';
       context.font = '60px "Yatra One"';
-      context.fillText(`!Congratulations! You Win! 🏆`, 50, 250);
+      context.fillText(`Congratulations! You Win! 🏆`, 50, 250);
 
       context.font = '30px "Yatra One"';
       context.fillText(`Points: ${Math.floor(this.score)}`, 130, 400);

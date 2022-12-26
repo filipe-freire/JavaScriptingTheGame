@@ -48,13 +48,13 @@ footer {
   text-align: center;
 }
 
-footer > p > span {
+footer>p>span {
   color: #ecd448;
   font-size: 1.3em;
   font-family: 'Dancing Script', 'Anonymous Pro', monospace;
 }
 
-footer > p + p {
+footer>p+p {
   margin-top: 1.5em;
   font-style: italic;
   font-size: 0.7em;
@@ -87,18 +87,19 @@ footer > p + p {
   margin-top: 1em;
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   width: 100%;
 }
 
-.game-characters > h1 {
+.game-characters>h1 {
   font-size: 2em;
 }
 
-.keyboard-controls > p + p {
+.keyboard-controls>p+p {
   margin-top: 0.5em;
 }
 
-.keyboard-controls > h1 {
+.keyboard-controls>h1 {
   font-size: 2em;
   margin-bottom: 20px;
 }
@@ -111,7 +112,7 @@ footer > p + p {
   align-items: center;
 }
 
-.powerups > div {
+.powerups>div {
   max-width: 200px;
 }
 
@@ -130,7 +131,7 @@ footer > p + p {
   border-radius: 10px;
 }
 
-.game-intro > p {
+.game-intro>p {
   /* max-width: 700px; */
   margin-top: 1em;
   line-height: 1.1;
@@ -154,10 +155,7 @@ footer > p + p {
 }
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  height: 500px;
-  margin-bottom: 2em;
+  display: none;
 }
 
 canvas {
@@ -188,15 +186,55 @@ canvas {
   align-items: center;
 }
 
-.flex > p {
+.flex>p {
   max-width: 110px;
 }
 
-.flex + .flex {
+.flex+.flex {
   margin-top: 1em;
 }
 
 #do-info {
   font-size: 1em;
   font-style: italic;
+}
+
+.mobile-message {
+  display: block;
+  color: #fff;
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+#startGame,
+#newGame {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    margin-bottom: 2em;
+  }
+
+  .info-container {
+    flex-direction: row
+  }
+
+  .mobile-message {
+    display: none;
+  }
+
+  #startGame,
+  #newGame {
+    display: block;
+    margin: 1em auto 0;
+    padding: 0.25em 2em;
+    background-color: #d3a831;
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 1.5em;
+    filter: drop-shadow(0 0 6px #ecd448);
+  }
 }

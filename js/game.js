@@ -64,7 +64,7 @@ class Game {
 
   setKeyBindings() {
     window.addEventListener('keydown', event => {
-      const key = event.key;
+      const key = event.code;
       switch (key) {
         case 'ArrowUp':
           if (!this.isPaused) {
@@ -78,7 +78,8 @@ class Game {
             this.player.y += this.player.movementSpeed;
             break;
           }
-        case 'b':
+        case 'Space':
+          event.preventDefault()
           if (!this.isPaused) {
             event.preventDefault();
             if (this.bullet.bulletsLeft > 0) {
@@ -93,7 +94,7 @@ class Game {
             }
             break;
           }
-        case 'q':
+        case 'KeyQ':
           event.preventDefault();
           this.togglePause();
       }
